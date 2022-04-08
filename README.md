@@ -13,6 +13,8 @@
 
 ## Set Env
 
+- Set Netlify Dashboard Variable Env
+
 ```bash
 $ touch .env
 $ echo FAUNA_DB_SERVER_KEY=HERE_YOUR_KEY >.env
@@ -30,6 +32,25 @@ $ yarn setup
 $ netlify dev
 ```
 
-## Deploy
+## Build
 
+```bash
+$ yarn build
+```
+
+## Deploy Dev
+
+```bash
+$ time netlify deploy
+```
+
+## Deploy Prod
+
+- First
 [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/Higashi-Kota/test-netlify-faunadb)
+
+- After Second
+
+```bash
+$ time netlify deploy --prod
+```
