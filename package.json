@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@analytics/google-analytics": "^0.3.1",
+    "analytics": "^0.3.5",
+    "faunadb": "^4.5.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
+  },
+  "scripts": {
+    "setup": "node -r esm ./scripts/setup.js",
+    "dev": "netlify dev",
+    "build": "react-scripts build",
+    "format": "prettier --write \"{,!(node_modules|dist|build)/**/}*.*\""
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "esm": "^3.2.25",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
