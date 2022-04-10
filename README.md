@@ -7,6 +7,10 @@
   - [Netlify Functions](https://www.netlify.com/docs/functions/)
   - [Netlify JSON web token-based Identity](https://identity.netlify.com/)
 
+- Stack
+
+  - [react-toastify](https://github.com/fkhadra/react-toastify)
+
 - Todo
   - react class >>> react function
   - emotionaize css in js
