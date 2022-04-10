@@ -38,7 +38,15 @@ const TodoItem = ({
           />
         </div>
       </label>
-      <button data-id={id} onClick={deleteTodo}>
+
+      <button
+        data-id={id}
+        onClick={deleteTodo}
+        style={{
+          marginRight: 10,
+          zIndex: 1,
+        }}
+      >
         delete
       </button>
     </div>

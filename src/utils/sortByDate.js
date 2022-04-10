@@ -1,4 +1,4 @@
-export default function sortDate(dateKey, order) {
+function sortByDate(dateKey, order) {
   return function (a, b) {
     const timeA = new Date(a[dateKey]).getTime();
     const timeB = new Date(b[dateKey]).getTime();
@@ -9,3 +9,5 @@ export default function sortDate(dateKey, order) {
     return timeB - timeA;
   };
 }
+
+export { sortByDate };

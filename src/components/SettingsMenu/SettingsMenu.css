@@ -39,22 +39,6 @@
   font-size: 16px;
   font-weight: 600;
 }
-.settings-options-wrapper {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.settings-option {
-  padding: 3px 8px;
-  margin: 5px;
-  border: 1px solid;
-  font-size: 12px;
-  cursor: pointer;
-  &:hover,
-  &.activeClass {
-    color: #fff;
-  }
-}
 
 @media (max-width: 768px) {
   .settings-close {

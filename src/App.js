@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ContentEditable from './components/ContentEditable';
 import { AppHeader } from './components/AppHeader';
 import { SettingsMenu } from './components/SettingsMenu';
 import SettingsIcon from './components/SettingsIcon';
 import analytics from './utils/analytics';
 import api from './utils/api';
-import sortByDate from './utils/sortByDate';
-import isLocalHost from './utils/isLocalHost';
+import { sortByDate } from './utils/sortByDate';
 import './App.css';
+
+import styled from '@emotion/styled';
 
 import { ToastContainer } from 'react-toastify';
 import { notify } from './utils/notify';
@@ -15,6 +16,15 @@ import { notify } from './utils/notify';
 import { getTodoId } from './utils/getTodoId';
 
 import { TodoItemList } from './components/TodoItemList';
+
+import { Nice } from './components/Nice';
+
+const StyledContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const App = ({ children }) => {
   const [todos, setTodos] = useState([]);
@@ -32,9 +42,11 @@ const App = ({ children }) => {
     });
   }, []);
 
-  const handleTodoChange = (e) => {
+  const handleTodoChange = useCallback((e) => {
+    console.log(e);
     setTask(e.target.value);
-  };
+  }, []);
+
   const handleOpenModal = (e) => {
     setShowMenu(true);
     analytics.track('modalOpened', {
@@ -69,8 +81,6 @@ const App = ({ children }) => {
       }
     );
 
-    console.log(data);
-
     if (!data.completedTodoIds.length) {
       handleCloseModal();
       return `Please check off some todos to batch remove them`;
@@ -78,11 +88,11 @@ const App = ({ children }) => {
 
     try {
       const response = await api.batchDelete(data.completedTodoIds);
-      console.log(response);
       analytics.track('todosBatchDeleted', {
         category: 'todos',
       });
       setTodos(data.optimisticState);
+      handleCloseModal();
       return `Batch removal complete ${data.completedTodoIds}`;
     } catch (error) {
       return `Something went wrong...`;
@@ -107,6 +117,7 @@ const App = ({ children }) => {
         category: 'todos',
         label: task,
       });
+      setTodos([...todos, response]);
       notify({ message: `Nice Work! Add Todo.` });
     } catch (error) {
       taskRef.current.focus();
@@ -196,7 +207,6 @@ const App = ({ children }) => {
         optimisticState: [],
       }
     );
-    console.log(filteredTodos);
 
     try {
       const response = await api.delete(todoId);
@@ -218,7 +228,6 @@ const App = ({ children }) => {
     const orderBy = 'desc'; // or `asc`
     const sortOrder = sortByDate(timeStampKey, orderBy);
     const todosByDate = todos.sort(sortOrder);
-    console.log(todosByDate);
     return (
       <TodoItemList
         itemInfoList={todosByDate}
@@ -229,8 +238,10 @@ const App = ({ children }) => {
     );
   };
 
+  const [hoge, setHoge] = useState('');
+
   return (
-    <div>
+    <StyledContainer>
       <div>
         <h2>
           Create todo
@@ -256,13 +267,14 @@ const App = ({ children }) => {
           </div>
         </form>
         {renderTodoItemList()}
+        {/* <Nice></Nice> */}
       </div>
       <SettingsMenu
         showMenu={showMenu}
         handleModalClose={handleCloseModal}
         handleClearCompleted={clearCompleted}
       />
-    </div>
+    </StyledContainer>
   );
 };
 
