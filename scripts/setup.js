@@ -13,7 +13,10 @@ import { client, q } from './config';
   response = await client.query(
     q.If(
       q.Not(q.Exists(q.Index('all_todos'))),
-      q.CreateIndex({ name: 'all_todos' }),
+      q.CreateIndex({
+        name: 'all_todos',
+        source: q.Collection('todos'),
+      }),
       `already exists, not create index.`
     )
   );

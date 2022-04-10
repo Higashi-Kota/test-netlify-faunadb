@@ -47,7 +47,7 @@ $ time netlify deploy
 ## Deploy Prod
 
 - First
-[Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/Higashi-Kota/test-netlify-faunadb)
+  [Deploy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/Higashi-Kota/test-netlify-faunadb)
 
 - After Second
 
