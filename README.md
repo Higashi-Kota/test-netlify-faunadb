@@ -6,6 +6,7 @@
 
   - [Netlify Functions](https://www.netlify.com/docs/functions/)
   - [Netlify JSON web token-based Identity](https://identity.netlify.com/)
+  - [content-editable-elements-in-javascript-react](https://www.taniarascia.com/content-editable-elements-in-javascript-react/?utm_source=pocket_mylist)
 
 - Stack
 
