@@ -14,7 +14,21 @@ function Layout({ children }) {
       exit="exit"
       variants={variants}
       transition={{ duration: 0.4, type: 'easeInOut' }}
-      style={{ position: 'relative' }}
+      style={{
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        background: 'rgba(95, 95, 95, 0.5)',
+        backdropFilter: 'blur(10px)',
+        fontSize: `13px`,
+        width: `100%`,
+        height: `100%`,
+        zIndex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+      }}
     >
       {children}
     </motion.div>
