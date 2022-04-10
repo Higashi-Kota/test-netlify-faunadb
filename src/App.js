@@ -119,6 +119,7 @@ const App = ({ children }) => {
       });
       setTodos([...todos, response]);
       notify({ message: `Nice Work! Add Todo.` });
+      setTask('');
     } catch (error) {
       taskRef.current.focus();
       notify({ message: `Something went worng...` });
