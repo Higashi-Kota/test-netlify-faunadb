@@ -1,21 +1,32 @@
-import React from 'react';
-import styles from './SettingIcon.css'; // eslint-disable-line
+import styled from '@emotion/styled';
+
+const StyledSetting = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledSettingIcon = styled.svg`
+  fill: #b7b9bd;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+`;
 
 const SettingIcon = (props) => {
   const className = props.className || '';
   return (
-    <span
+    <StyledSetting
       onClick={props.onClick}
       className={`setting-toggle-wrapper ${className}`}
     >
-      <svg
+      <StyledSettingIcon
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 125"
-        className="settings-toggle"
       >
         <use xlinkHref="#settings" className="settings-gear"></use>
-      </svg>
-    </span>
+      </StyledSettingIcon>
+    </StyledSetting>
   );
 };
 

@@ -10,42 +10,50 @@ const TodoItemList = memo(
     updateTodoTitle,
     deleteTodo,
     width = 300,
-    height = 400,
+    height = 500,
   }) => {
-    // https://addyosmani.com/blog/react-window/
-    // https://react-window.vercel.app/#/examples/list/variable-size
-    return (
-      <List
-        height={height}
-        itemCount={itemInfoList.length}
-        itemSize={height * 0.3}
-        item
-        className={css`
-          width: 100%;
-          @media screen and (max-width: 768px) {
-            width: 300px;
-          }
-        `}
-      >
-        {({ index, style }) => {
-          const todo = itemInfoList[index];
-          const { data } = { ...todo };
-          const id = getTodoId(todo);
-          return (
-            <TodoItem
-              key={index}
-              index={index}
-              style={style}
-              id={id}
-              handleTodoCheckbox={handleTodoCheckbox}
-              updateTodoTitle={updateTodoTitle}
-              deleteTodo={deleteTodo}
-              info={data}
-            ></TodoItem>
-          );
-        }}
-      </List>
-    );
+    if (itemInfoList.length === 0) {
+      return <div>{'Nothing Todo...'}</div>;
+    } else {
+      // https://addyosmani.com/blog/react-window/
+      // https://react-window.vercel.app/#/examples/list/variable-size
+      return (
+        <List
+          height={height}
+          itemCount={itemInfoList.length}
+          itemSize={Math.floor(height / itemInfoList.length) + 10}
+          className={css`
+            width: 100%;
+            @media screen and (max-width: 768px) {
+              width: 100%;
+              height: auto;
+            }
+          `}
+          style={{
+            overflow: 'hidden',
+            overflowY: 'auto',
+          }}
+        >
+          {({ index, style }) => {
+            const todo = itemInfoList[index];
+            const { data } = { ...todo };
+            const id = getTodoId(todo);
+            return (
+              <TodoItem
+                key={index}
+                index={index}
+                style={style}
+                id={id}
+                handleTodoCheckbox={handleTodoCheckbox}
+                updateTodoTitle={updateTodoTitle}
+                deleteTodo={deleteTodo}
+                info={data}
+              ></TodoItem>
+            );
+          }}
+        </List>
+      );
+    }
   }
 );
 

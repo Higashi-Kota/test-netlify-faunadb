@@ -20,10 +20,61 @@ import { TodoItemList } from './components/TodoItemList';
 import { Nice } from './components/Nice';
 
 const StyledContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 5vh;
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
+const StyledHeader = styled.h2`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
+  margin-bottom: 2vh;
+  @media screen and (max-width: 768px) {
+    justify-content: space-around;
+  }
+`;
+
+const StyledInput = styled.input`
+  font-size: 14px;
+  padding: 11px 15px;
+  display: inline-block;
+  box-shadow: 0px 0px 0px 2px rgba(120, 130, 152, 0.25);
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 0px 2px rgb(43, 190, 185);
+    box-shadow: 0px 0px 0px 2px #00ad9f;
+  }
+  min-width: 200px;
+  @media screen and (max-width: 768px) {
+    min-width: 300px;
+  }
+`;
+
+const StyledForm = styled.form`
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const StyledFormController = styled.div`
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    margin-top: 15px;
+  }
 `;
 
 const App = ({ children }) => {
@@ -238,31 +289,22 @@ const App = ({ children }) => {
 
   return (
     <StyledContainer>
-      <div>
-        <h2>
-          Create todo
-          <SettingsIcon onClick={handleOpenModal} className="mobile-toggle" />
-        </h2>
-        <form className="todo-create-wrapper" onSubmit={saveTodo}>
-          <input
-            className="todo-create-input"
-            placeholder="Add a todo item"
-            name="name"
-            autoComplete="off"
-            style={{ marginRight: 20 }}
-            ref={taskRef}
-          />
-          <div className="todo-actions">
-            <button className="todo-create-button">Create todo</button>
-            <SettingsIcon
-              onClick={handleOpenModal}
-              className="desktop-toggle"
-            />
-          </div>
-        </form>
-        {renderTodoItemList()}
-        {/* <Nice></Nice> */}
-      </div>
+      <StyledHeader>
+        Create todo
+        <SettingsIcon onClick={handleOpenModal} />
+      </StyledHeader>
+      <StyledForm onSubmit={saveTodo}>
+        <StyledInput
+          placeholder="Add a todo item"
+          name="name"
+          autoComplete="off"
+          ref={taskRef}
+        />
+        <StyledFormController>
+          <button className="todo-create-button">Create todo</button>
+        </StyledFormController>
+      </StyledForm>
+      {renderTodoItemList()}
       <SettingsMenu
         showMenu={showMenu}
         handleModalClose={handleCloseModal}
