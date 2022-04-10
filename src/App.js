@@ -29,7 +29,6 @@ const StyledContainer = styled.div`
 const App = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
-  const [task, setTask] = useState('');
   const taskRef = useRef(null);
 
   useEffect(() => {
@@ -40,11 +39,6 @@ const App = ({ children }) => {
       console.log('all todos', todos);
       setTodos(todos);
     });
-  }, []);
-
-  const handleTodoChange = useCallback((e) => {
-    console.log(e);
-    setTask(e.target.value);
   }, []);
 
   const handleOpenModal = (e) => {
@@ -100,6 +94,7 @@ const App = ({ children }) => {
   };
   const saveTodo = async (e) => {
     e.preventDefault();
+    const task = taskRef.current.value;
     if (!task) {
       taskRef.current.focus();
       notify({ message: `Please add Todo title` });
@@ -119,7 +114,7 @@ const App = ({ children }) => {
       });
       setTodos([...todos, response]);
       notify({ message: `Nice Work! Add Todo.` });
-      setTask('');
+      taskRef.current.value = ``;
     } catch (error) {
       taskRef.current.focus();
       notify({ message: `Something went worng...` });
@@ -231,7 +226,7 @@ const App = ({ children }) => {
     const todosByDate = todos.sort(sortOrder);
     return (
       <TodoItemList
-        itemInfoList={todosByDate}
+        itemInfoList={todos}
         handleTodoCheckbox={handleTodoCheckbox}
         updateTodoTitle={updateTodoTitle}
         deleteTodo={deleteTodo}
@@ -253,8 +248,6 @@ const App = ({ children }) => {
             className="todo-create-input"
             placeholder="Add a todo item"
             name="name"
-            value={task}
-            onChange={handleTodoChange}
             autoComplete="off"
             style={{ marginRight: 20 }}
             ref={taskRef}
